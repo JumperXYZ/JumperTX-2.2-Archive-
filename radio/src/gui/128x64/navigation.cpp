@@ -168,8 +168,10 @@ int checkIncDec(event_t event, int val, int i_min, int i_max, unsigned int i_fla
    //schumixmd: just changed the event from LEFT to RIGHT
   if (s_editMode>0 && event==EVT_ROTARY_LEFT) {
     newval += min<int>(rotencSpeed, i_max-val);
-    while (isValueAvailable && !isValueAvailable(newval) && newval<=i_max) {
-      newval++;
+    while (isValueAvailable && !isValueAvailable(newval) && newval<=i_max)
+    {
+        newval++;
+
     }
     if (newval > i_max) {
       newval = val;
@@ -178,8 +180,10 @@ int checkIncDec(event_t event, int val, int i_min, int i_max, unsigned int i_fla
   }
   else if (s_editMode>0 && event==EVT_ROTARY_RIGHT) {
     newval -= min<int>(rotencSpeed, val-i_min);
-    while (isValueAvailable && !isValueAvailable(newval) && newval>=i_min) {
-      newval--;
+    while (isValueAvailable && !isValueAvailable(newval) && newval>=i_min)
+    {
+        newval--;
+
     }
     if (newval < i_min) {
       newval = val;
