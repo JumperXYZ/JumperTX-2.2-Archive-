@@ -651,6 +651,8 @@ const pm_char STR_SUBTYPE_FLYSKY[] PROGMEM =     "\004""Std\0""V9x9""V6x6""V912"
 
 const pm_char STR_SUBTYPE_AFHDS2A[] PROGMEM =    "\010""PWM,IBUS""PPM,IBUS""PWM,SBUS""PPM,SBUS";
 
+const pm_char STR_SUBTYPE_HUBSAN[] PROGMEM =     "\005"" H107"" H301"" H501";
+
 const pm_char STR_SUBTYPE_FRSKY[] PROGMEM =      "\007""D16\0   ""D8\0    ""D16 8ch""V8\0    ""LBT(EU)""LBT 8ch";
 
 const pm_char STR_SUBTYPE_HISKY[] PROGMEM =      "\005""HiSky""HK310";
@@ -696,7 +698,7 @@ const pm_char STR_SUBTYPE_CORONA[] PROGMEM =     "\002""V1""V2";
 const mm_protocol_definition multi_protocols[] = {
 
   {MM_RF_PROTO_FLYSKY,     4, false,      STR_SUBTYPE_FLYSKY,  nullptr},
-  {MM_RF_PROTO_HUBSAN,     0, false,      NO_SUBTYPE,          STR_MULTI_VIDFREQ},
+  {MM_RF_PROTO_HUBSAN,     2, false,      STR_SUBTYPE_HUBSAN,  STR_MULTI_VIDFREQ},
   {MM_RF_PROTO_FRSKY,      5, false,      STR_SUBTYPE_FRSKY,   STR_MULTI_RFTUNE},
   {MM_RF_PROTO_HISKY,      1, false,      STR_SUBTYPE_HISKY,   nullptr},
   {MM_RF_PROTO_V2X2,       1, false,      STR_SUBTYPE_V2X2,    nullptr},
