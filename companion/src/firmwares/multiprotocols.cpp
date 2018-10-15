@@ -37,6 +37,7 @@ static const QStringList STR_SUBTYPE_CUSTOM  ({
                                                 STR_MULTI_SUBTYPE " 4", STR_MULTI_SUBTYPE " 5", STR_MULTI_SUBTYPE " 6", STR_MULTI_SUBTYPE " 7"
                                               });
 static const QStringList STR_SUBTYPE_FLYSKY  {"Standard", "V9x9", "V6x6", "V912", "CX20"};
+static const QStringList STR_SUBTYPE_HUBSAN  {"H107", "H301", "H501"};
 static const QStringList STR_SUBTYPE_FRSKY   {"D16", "D8", "D16 8ch", "V8", "D16 EU-LBT", "D16 EU-LBT 8ch"};
 static const QStringList STR_SUBTYPE_HISKY   {"HiSky", "HK310"};
 static const QStringList STR_SUBTYPE_V2X2    {"V2x2", "JXD506"};
@@ -66,7 +67,7 @@ static const QStringList NO_SUBTYPE          {STR_MULTI_DEFAULT};
 
 const Multiprotocols multiProtocols {
   {MM_RF_PROTO_FLYSKY,     4, false,      STR_SUBTYPE_FLYSKY,  nullptr},
-  {MM_RF_PROTO_HUBSAN,     0, false,      NO_SUBTYPE,          STR_MULTI_VIDFREQ},
+  {MM_RF_PROTO_HUBSAN,     2, false,      STR_SUBTYPE_HUBSAN,  STR_MULTI_VIDFREQ},
   {MM_RF_PROTO_FRSKY,      5, false,      STR_SUBTYPE_FRSKY,   STR_MULTI_RFTUNE},
   {MM_RF_PROTO_HISKY,      1, false,      STR_SUBTYPE_HISKY,   nullptr},
   {MM_RF_PROTO_V2X2,       1, false,      STR_SUBTYPE_V2X2,    nullptr},
