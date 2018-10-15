@@ -118,56 +118,79 @@ bool keyDown()
 static bool keyPressed = false;
 static bool UpKeyPressed = true;
 static uint8_t loop5msCnt = 0;
+static uint8_t loopDelay = 50;
+static uint16_t loopCnt = 0;
 #endif
 
 #if defined(ROTARY_ENCODER_NAVIGATION)
 void checkRotaryEncoder()
 {
-#ifdef KEY_EMULATED_ROTENCODER
+  #ifdef KEY_EMULATED_ROTENCODER
 	uint32_t newpos = ROTARY_ENCODER_POSITION();
-  if (newpos != rotencPosition && !keyState(KEY_ENTER)) {
-    if ((rotencPosition & 0x01) && !(newpos & 0x01)) {
-      --rotencValue[0];
-		UpKeyPressed = false;
+    if (newpos != rotencPosition && !keyState(KEY_ENTER))
+    {
+      if ((rotencPosition & 0x01) && !(newpos & 0x01))
+      {
+        --rotencValue[0];
+        UpKeyPressed = false;
 		keyPressed = true;
-    }
-    else if ((rotencPosition & 0x02) && !(newpos & 0x02)){
-      ++rotencValue[0];
+      }
+      else if ((rotencPosition & 0x02) && !(newpos & 0x02))
+      {
+        ++rotencValue[0];
 		UpKeyPressed = true;
 		keyPressed = true;
+      }
+      rotencPosition = newpos;
+
+      #if !defined(BOOT)
+        if (g_eeGeneral.backlightMode & e_backlight_mode_keys)
+        {
+          backlightOn();
+        }
+      #endif
     }
-    rotencPosition = newpos;
-#if !defined(BOOT)
-    if (g_eeGeneral.backlightMode & e_backlight_mode_keys) {
-      backlightOn();
+
+
+    if (keyPressed)
+    {
+
+       if ((newpos & 0x03) == 0x03) {keyPressed = false;};
+
+       if (keyPressed)
+       {
+         loop5msCnt++;
+         loopCnt++;
+
+         if (loopCnt==400) {loopDelay=20;loop5msCnt=20;};
+         if (loopCnt==1500) {loopDelay=8;loop5msCnt=8;};
+         if (loopCnt==3000) {loopDelay=2;loop5msCnt=2;};
+
+         if (loop5msCnt==loopDelay)
+         {
+
+           if (UpKeyPressed)
+           {
+               rotencValue[0]++;
+           }
+           else
+           {
+               rotencValue[0]--;
+           };
+
+           loop5msCnt=0;
+         }
+       }
+
     }
-#endif
-  }
-if (keyPressed)
-	{
-	if ((newpos & 0x03) == 0x03) // 0 if button pressed-down
-	{
-	    keyPressed = false;
-	}
-	
-	if (keyPressed)
-		{
-			loop5msCnt++;
-			if (loop5msCnt == 50)
-			{
-				if (UpKeyPressed)
-					++rotencValue[0];
-				else
-					--rotencValue[0];
-				loop5msCnt = 0;
-				}
-			}
-		else
-			{
-				loop5msCnt = 0;
-				}
-			}
-	}
+    else
+    {
+        loop5msCnt=0;
+        loopCnt=0;
+        loopDelay=50;
+    }
+
+}
 #else // #ifdef KEY_EMULATED_ROTENCODER
 	uint32_t newpos = ROTARY_ENCODER_POSITION();
 	if (newpos != rotencPosition && !keyState(KEY_ENTER)) {
@@ -178,11 +201,11 @@ if (keyPressed)
 			++rotencValue[0];
 			}
 		rotencPosition = newpos;
-#if !defined(BOOT)
+   #if !defined(BOOT)
 			if (g_eeGeneral.backlightMode & e_backlight_mode_keys) {
 				backlightOn();
 				}
-#endif
+   #endif
 				}
 }
 #endif // #ifdef KEY_EMULATED_ROTENCODER				

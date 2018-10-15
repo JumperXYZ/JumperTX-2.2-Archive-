@@ -499,6 +499,10 @@ void usbJoystickUpdate();
   #define USB_NAME                     "FrSky Horus"
   #define USB_MANUFACTURER             'F', 'r', 'S', 'k', 'y', ' ', ' ', ' '  /* 8 bytes */
   #define USB_PRODUCT                  'H', 'o', 'r', 'u', 's', ' ', ' ', ' '  /* 8 Bytes */
+#elif defined(PCBX7)
+  #define USB_NAME                     "Jumper T12 "
+  #define USB_MANUFACTURER             'J', 'u', 'm', 'p', 'e', 'r', ' ', ' '  /* 8 bytes */
+  #define USB_PRODUCT                  'T', '1', '2', ' ', ' ', ' ', ' ', ' '  /* 8 Bytes */
 #elif defined(PCBX10)
   #define USB_NAME                     "FrSky X10"
   #define USB_MANUFACTURER             'F', 'r', 'S', 'k', 'y', ' ', ' ', ' '  /* 8 bytes */

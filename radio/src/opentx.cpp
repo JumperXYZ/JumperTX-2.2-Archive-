@@ -152,7 +152,7 @@ void per10ms()
       rePreviousValue = reNewValue;
 
       bool new_cw = (scrollRE < 0) ? false : true;
-      if ((g_tmr10ms - lastEvent >= 10) || (cw == new_cw)) { // 100ms
+      if ((g_tmr10ms - lastEvent >= 100) || (cw == new_cw)) {
 
         putEvent(new_cw ? EVT_ROTARY_RIGHT : EVT_ROTARY_LEFT);
 
